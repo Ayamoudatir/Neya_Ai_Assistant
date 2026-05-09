@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!-- ── Palette Neya ── -->
+    <color name="neya_paper">#F1EAE4</color>
+    <color name="neya_paper_warm">#F6EFE9</color>
+    <color name="neya_ink">#2A1F1B</color>
+    <color name="neya_ink_soft">#6F605A</color>
+    <color name="neya_rose_pale">#F4E4DE</color>
+    <color name="neya_rose_light">#EFD2CB</color>
+    <color name="neya_rose">#E5A5A0</color>
+    <color name="neya_rose_hot">#D87878</color>
+    <color name="neya_cream">#F8F3EE</color>
+    <color name="neya_danger">#C76B6B</color>
+    <color name="neya_white">#FFFFFF</color>
+    <color name="neya_avatar_bg">#D6A8A7</color>
+
+    <!-- ── Bulles de chat — light ── -->
+    <color name="bubble_user_bg">#E5A5A0</color>
+    <color name="bubble_user_text">#FFFFFF</color>
+    <color name="bubble_ai_bg">#F8F3EE</color>
+    <color name="bubble_ai_text">#2A1F1B</color>
+
+</resources>

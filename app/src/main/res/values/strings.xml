@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">Neya</string>
+    <string name="app_title">Neya</string>
+    <string name="app_subtitle">ton assistant IA</string>
+    <string name="hint_message">Écris à Neya…</string>
+    <string name="send">Envoyer</string>
+    <string name="speaking_label">• en train de parler…</string>
+</resources>

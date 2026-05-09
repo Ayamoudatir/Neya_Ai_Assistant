@@ -1,0 +1,25 @@
+<resources>
+    <style name="Base.Theme.AIStudyAssistant_Moudatir" parent="Theme.Material3.DayNight.NoActionBar">
+
+        <item name="colorPrimary">@color/neya_rose</item>
+        <item name="colorOnPrimary">@color/neya_white</item>
+        <item name="colorPrimaryContainer">@color/neya_rose_pale</item>
+        <item name="colorOnPrimaryContainer">@color/neya_ink</item>
+
+        <item name="colorSecondary">@color/neya_rose_hot</item>
+        <item name="colorOnSecondary">@color/neya_white</item>
+        <item name="colorSecondaryContainer">@color/neya_rose_light</item>
+        <item name="colorOnSecondaryContainer">@color/neya_ink</item>
+
+        <item name="colorSurface">@color/neya_paper</item>
+        <item name="colorOnSurface">@color/neya_ink</item>
+        <item name="colorSurfaceVariant">@color/neya_paper_warm</item>
+        <item name="colorOnSurfaceVariant">@color/neya_ink_soft</item>
+        <item name="android:colorBackground">@color/neya_paper</item>
+        <item name="android:windowBackground">@color/neya_paper</item>
+
+        <item name="colorError">@color/neya_danger</item>
+        <item name="colorOnError">@color/neya_white</item>
+
+    </style>
+</resources>
