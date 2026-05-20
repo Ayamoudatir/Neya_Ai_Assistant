@@ -1,0 +1,167 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:paddingBottom="32dp"
+    android:background="@color/neya_paper">
+
+    <!-- Handle bar -->
+    <View
+        android:layout_width="40dp"
+        android:layout_height="4dp"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="12dp"
+        android:layout_marginBottom="4dp"
+        android:background="#CCCCCC" />
+
+    <!-- Titre -->
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingHorizontal="24dp"
+        android:paddingTop="16dp"
+        android:paddingBottom="8dp"
+        android:text="Joindre"
+        android:textSize="18sp"
+        android:fontFamily="@font/space_grotesk"
+        android:textColor="@color/neya_ink"
+        android:textStyle="bold" />
+
+    <!-- ── Option : Ma position ─────────────────────────────────────── -->
+    <LinearLayout
+        android:id="@+id/optionLocation"
+        android:layout_width="match_parent"
+        android:layout_height="64dp"
+        android:orientation="horizontal"
+        android:gravity="center_vertical"
+        android:paddingHorizontal="24dp"
+        android:background="?attr/selectableItemBackground">
+
+        <TextView
+            android:layout_width="44dp"
+            android:layout_height="44dp"
+            android:gravity="center"
+            android:text="📍"
+            android:textSize="22sp"
+            android:background="@drawable/bg_attach_option"
+            android:padding="8dp" />
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:layout_marginStart="16dp"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Ma position"
+                android:textSize="15sp"
+                android:fontFamily="@font/manrope"
+                android:textColor="@color/neya_ink"
+                android:textStyle="bold" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Partager ta localisation actuelle"
+                android:textSize="12sp"
+                android:fontFamily="@font/manrope"
+                android:textColor="@color/neya_ink_soft" />
+        </LinearLayout>
+    </LinearLayout>
+
+    <!-- ── Option : Caméra ──────────────────────────────────────────── -->
+    <LinearLayout
+        android:id="@+id/optionCamera"
+        android:layout_width="match_parent"
+        android:layout_height="64dp"
+        android:orientation="horizontal"
+        android:gravity="center_vertical"
+        android:paddingHorizontal="24dp"
+        android:background="?attr/selectableItemBackground">
+
+        <TextView
+            android:layout_width="44dp"
+            android:layout_height="44dp"
+            android:gravity="center"
+            android:text="📷"
+            android:textSize="22sp"
+            android:background="@drawable/bg_attach_option"
+            android:padding="8dp" />
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:layout_marginStart="16dp"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Caméra"
+                android:textSize="15sp"
+                android:fontFamily="@font/manrope"
+                android:textColor="@color/neya_ink"
+                android:textStyle="bold" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Prendre une photo"
+                android:textSize="12sp"
+                android:fontFamily="@font/manrope"
+                android:textColor="@color/neya_ink_soft" />
+        </LinearLayout>
+    </LinearLayout>
+
+    <!-- ── Option : Galerie ─────────────────────────────────────────── -->
+    <LinearLayout
+        android:id="@+id/optionGallery"
+        android:layout_width="match_parent"
+        android:layout_height="64dp"
+        android:orientation="horizontal"
+        android:gravity="center_vertical"
+        android:paddingHorizontal="24dp"
+        android:background="?attr/selectableItemBackground">
+
+        <TextView
+            android:layout_width="44dp"
+            android:layout_height="44dp"
+            android:gravity="center"
+            android:text="🖼️"
+            android:textSize="22sp"
+            android:background="@drawable/bg_attach_option"
+            android:padding="8dp" />
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:layout_marginStart="16dp"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Galerie"
+                android:textSize="15sp"
+                android:fontFamily="@font/manrope"
+                android:textColor="@color/neya_ink"
+                android:textStyle="bold" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Envoyer une image depuis ta galerie"
+                android:textSize="12sp"
+                android:fontFamily="@font/manrope"
+                android:textColor="@color/neya_ink_soft" />
+        </LinearLayout>
+    </LinearLayout>
+
+</LinearLayout>

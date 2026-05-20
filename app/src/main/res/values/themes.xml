@@ -18,8 +18,9 @@
         <item name="colorOnSurface">@color/neya_ink</item>
         <item name="colorSurfaceVariant">@color/neya_paper_warm</item>
         <item name="colorOnSurfaceVariant">@color/neya_ink_soft</item>
-        <item name="android:colorBackground">@color/neya_paper</item>
-        <item name="android:windowBackground">@color/neya_paper</item>
+        <item name="android:colorBackground">@color/neya_avatar_bg</item>
+        <!-- Le fond de fenêtre = image de fond de l'app -->
+        <item name="android:windowBackground">@drawable/bg_appli</item>
 
         <!-- Erreur -->
         <item name="colorError">@color/neya_danger</item>
@@ -30,7 +31,14 @@
 
     </style>
 
-    <style name="Theme.AIStudyAssistant_Moudatir" parent="Base.Theme.AIStudyAssistant_Moudatir" />
+    <style name="Theme.AIStudyAssistant_Moudatir" parent="Base.Theme.AIStudyAssistant_Moudatir">
+        <!-- Status bar = même couleur que le header → continuité visuelle -->
+        <item name="android:statusBarColor">#F5F2EF</item>
+        <!-- Nav bar = même couleur que l'input bar -->
+        <item name="android:navigationBarColor">#F5F2EF</item>
+        <item name="android:windowLightStatusBar">true</item>
+        <item name="android:windowLightNavigationBar">true</item>
+    </style>
 
     <!-- Style Toolbar Neya -->
     <style name="NeyaToolbar" parent="Widget.Material3.Toolbar">
