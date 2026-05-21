@@ -478,9 +478,61 @@ class MainActivity : AppCompatActivity() {
             dialog.dismiss()
             openGallery()
         }
+        view.findViewById<LinearLayout>(R.id.optionMemory).setOnClickListener {
+            dialog.dismiss()
+            showMemoryDialog()
+        }
 
         dialog.setContentView(view)
         dialog.show()
+    }
+
+    // ── RAG — Mémorisation longue durée ───────────────────────────────────────
+    private fun showMemoryDialog() {
+        val editText = android.widget.EditText(this).apply {
+            hint = "Ex: Je suis en L3 informatique à l'ENSIAS..."
+            setSingleLine(false)
+            minLines = 3
+            maxLines = 6
+            setPadding(48, 24, 48, 8)
+        }
+
+        androidx.appcompat.app.AlertDialog.Builder(this)
+            .setTitle("🧠 Apprendre à Neya")
+            .setMessage("Écris une information que Neya doit mémoriser pour toujours :")
+            .setView(editText)
+            .setPositiveButton("Mémoriser") { _, _ ->
+                val text = editText.text.toString().trim()
+                if (text.isNotEmpty()) sendToMemory(text)
+            }
+            .setNegativeButton("Annuler", null)
+            .show()
+    }
+
+    private fun sendToMemory(text: String) {
+        lifecycleScope.launch(Dispatchers.IO) {
+            try {
+                val json = """{"text":${com.google.gson.JsonPrimitive(text)},"title":""}"""
+                val conn = (URL("${settings.serverUrl}/remember").openConnection() as HttpURLConnection).apply {
+                    requestMethod = "POST"
+                    setRequestProperty("Content-Type", "application/json")
+                    connectTimeout = 10_000
+                    readTimeout    = 10_000
+                    doOutput = true
+                    outputStream.use { it.write(json.toByteArray()) }
+                }
+                val response = conn.inputStream.bufferedReader().readText()
+                val total = org.json.JSONObject(response).optInt("total", -1)
+                withContext(Dispatchers.Main) {
+                    val msg = if (total >= 0) "🧠 Mémorisé ! ($total info(s) en mémoire)" else "🧠 Mémorisé !"
+                    Toast.makeText(this@MainActivity, msg, Toast.LENGTH_SHORT).show()
+                }
+            } catch (e: Exception) {
+                withContext(Dispatchers.Main) {
+                    Toast.makeText(this@MainActivity, "❌ Impossible de mémoriser (serveur injoignable)", Toast.LENGTH_LONG).show()
+                }
+            }
+        }
     }
 
     // ── Localisation ──────────────────────────────────────────────────────────
