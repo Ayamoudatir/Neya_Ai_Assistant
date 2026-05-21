@@ -112,6 +112,13 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
+    // ── Fichier (PDF/TXT/DOCX → RAG) ─────────────────────────────────────────
+    private val fileLauncher = registerForActivityResult(
+        ActivityResultContracts.GetContent()
+    ) { uri ->
+        uri?.let { uploadFileToRag(it) }
+    }
+
     // ── Galerie ───────────────────────────────────────────────────────────────
     private val galleryLauncher = registerForActivityResult(
         ActivityResultContracts.GetContent()
@@ -478,6 +485,10 @@ class MainActivity : AppCompatActivity() {
             dialog.dismiss()
             openGallery()
         }
+        view.findViewById<LinearLayout>(R.id.optionFile).setOnClickListener {
+            dialog.dismiss()
+            fileLauncher.launch("*/*")
+        }
         view.findViewById<LinearLayout>(R.id.optionMemory).setOnClickListener {
             dialog.dismiss()
             showMemoryDialog()
@@ -507,6 +518,60 @@ class MainActivity : AppCompatActivity() {
             }
             .setNegativeButton("Annuler", null)
             .show()
+    }
+
+    private fun uploadFileToRag(uri: Uri) {
+        val fileName = contentResolver.query(uri, null, null, null, null)?.use { cursor ->
+            val idx = cursor.getColumnIndex(android.provider.OpenableColumns.DISPLAY_NAME)
+            cursor.moveToFirst()
+            if (idx >= 0) cursor.getString(idx) else "fichier"
+        } ?: "fichier"
+
+        Toast.makeText(this, "📄 Envoi de $fileName…", Toast.LENGTH_SHORT).show()
+
+        lifecycleScope.launch(Dispatchers.IO) {
+            try {
+                val bytes = contentResolver.openInputStream(uri)?.readBytes()
+                    ?: throw Exception("Impossible de lire le fichier")
+
+                val boundary = "Boundary_${System.currentTimeMillis()}"
+                val conn = (URL("${settings.serverUrl}/upload").openConnection() as HttpURLConnection).apply {
+                    requestMethod = "POST"
+                    setRequestProperty("Content-Type", "multipart/form-data; boundary=$boundary")
+                    connectTimeout = 30_000
+                    readTimeout    = 60_000
+                    doOutput = true
+                }
+
+                val body = buildString {
+                    append("--$boundary\r\n")
+                    append("Content-Disposition: form-data; name=\"file\"; filename=\"$fileName\"\r\n")
+                    append("Content-Type: application/octet-stream\r\n\r\n")
+                }.toByteArray() + bytes + "\r\n--$boundary--\r\n".toByteArray()
+
+                conn.outputStream.use { it.write(body) }
+
+                val response = conn.inputStream.bufferedReader().readText()
+                val json = org.json.JSONObject(response)
+
+                withContext(Dispatchers.Main) {
+                    if (json.getString("status") == "ok") {
+                        val chunks = json.optInt("chunks", 0)
+                        val total  = json.optInt("total_docs", 0)
+                        Toast.makeText(this@MainActivity,
+                            "✅ $fileName mémorisé ! ($chunks morceaux, $total docs au total)",
+                            Toast.LENGTH_LONG).show()
+                    } else {
+                        val msg = json.optString("message", "Erreur inconnue")
+                        Toast.makeText(this@MainActivity, "❌ $msg", Toast.LENGTH_LONG).show()
+                    }
+                }
+            } catch (e: Exception) {
+                withContext(Dispatchers.Main) {
+                    Toast.makeText(this@MainActivity, "❌ Erreur : ${e.message}", Toast.LENGTH_LONG).show()
+                }
+            }
+        }
     }
 
     private fun sendToMemory(text: String) {

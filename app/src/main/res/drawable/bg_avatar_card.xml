@@ -1,8 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <shape xmlns:android="http://schemas.android.com/apk/res/android"
-    android:shape="oval">
-    <solid android:color="@color/neya_avatar_bg" />
-    <stroke
-        android:width="2dp"
-        android:color="@color/neya_avatar_bg" />
+    android:shape="rectangle">
+    <corners
+        android:topLeftRadius="0dp"
+        android:topRightRadius="0dp"
+        android:bottomLeftRadius="0dp"
+        android:bottomRightRadius="0dp"/>
+    <solid android:color="@android:color/transparent" />
 </shape>
